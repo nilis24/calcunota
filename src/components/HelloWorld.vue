@@ -1,58 +1,185 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <h1 class="text-3xl font-bold text-center my-5">Calcunota</h1>
+
+  <div class="container mx-auto w-full max-w-lg">
+
+
+    <div class="flex flex-wrap -mx-3 mb-6">
+      <div class="w-full px-3">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="pond-esp-1">
+            Estudis que has cursat
+          </label>
+          <div class="relative">
+            <select @change="HideSeleGeneral" v-model="EstudisCursats" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="pond-esp-1">
+              <option>Batxillerat</option>
+              <option>Batxibac</option>
+              <option>CFGS</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+              <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+    <div class="flex flex-wrap -mx-3 mb-6">
+      <div class="w-full px-3">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="nota-acces">
+          Nota {{ EstudisCursats }}
+        </label>
+        <input :class="{ BorderError: NotaAccesHasError }" v-model="NotaAcces" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="nota-acces" type="number">
+      </div>
+      <p :class="{ hidden: !NotaAccesHasError }" class="text-red-500 text-xs italic ml-3">La nota ha d'estar entre 5 i 10</p>
+    </div>
+
+
+    <div :class="{ hidden: IsBatxiBacOrCFGS }" class="flex flex-wrap -mx-3 mb-6">
+      <div class="w-full px-3">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="nota-sele-general">
+          Nota selectivitat general
+        </label>
+        <input :class="{ BorderError: NotaSeleGeneralHasError }" v-model="NotaSeleGeneral" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="nota-sele-general" type="number">
+      </div>
+      <p :class="{ hidden: !NotaSeleGeneralHasError }" class="text-red-500 text-xs italic ml-3">La nota ha d'estar entre 5 i 10</p>
+    </div>
+
+
+    <div class="flex flex-wrap -mx-3 mb-6">
+
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="pond-esp-1">
+          ponderació especifica 1
+        </label>
+        <div class="relative">
+          <select v-model="PondEsp1" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="pond-esp-1">
+            <option>0.1</option>
+            <option>0.2</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full md:w-1/2 px-3">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="nota-esp-1">
+          Nota especifica 1
+        </label>
+        <input :class="{ BorderError: NotaEsp1HasError }" v-model="NotaEsp1" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="nota-esp-1" type="number">
+        <p :class="{ hidden: !NotaEsp1HasError }" class="text-red-500 text-xs italic ml-3">La nota ha d'estar entre 5 i 10</p>
+      </div>
+
+    </div>
+
+
+    <div class="flex flex-wrap -mx-3 mb-6">
+
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="pond-esp-2">
+          ponderació especifica 2
+        </label>
+        <div class="relative">
+          <select v-model="PondEsp2" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="pond-esp-2">
+            <option>0.1</option>
+            <option>0.2</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full md:w-1/2 px-3">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="nota-esp-2">
+          Nota especifica 2
+        </label>
+        <input :class="{ BorderError: NotaEsp2HasError }" v-model="NotaEsp2" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="nota-esp-2" type="number">
+        <p :class="{ hidden: !NotaEsp2HasError }" class="text-red-500 text-xs italic ml-3">La nota ha d'estar entre 5 i 10</p>
+      </div>
+
+    </div>
+
+
+    <div class="text-center">
+      <button @click="CalcularNota" class="p-3 bg-cyan-500 hover:bg-cyan-600 text-white rounded">Calcular nota</button>
+    </div>
   </div>
+
 </template>
 
 <script>
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
+  data () {
+    return {
+      EstudisCursats: "Batxillerat",
+      NotaAcces: "",
+      NotaSeleGeneral: "",
+      NotaEsp1: "",
+      NotaEsp2: "",
+      PondEsp1: 0.2,
+      PondEsp2: 0.2,
+      NotaAdmissio: 0,
+      IsBatxiBacOrCFGS: false,
+      NotaAccesHasError: false,
+      NotaSeleGeneralHasError: false,
+      NotaEsp1HasError: false,
+      NotaEsp2HasError: false,
+    }
+  },
+  methods: {
+    CalcularNota: function() {
+      this.ShowErrors()
+      switch(this.EstudisCursats) {
+        case "Batxillerat":
+          this.NotaAdmissio = (this.NotaAcces * 0.6) + (this.NotaSeleGeneral * 0.4) + (this.NotaEsp1 * this.PondEsp1) + (this.NotaEsp2 * this.PondEsp2)
+          if(this.NotaAccesHasError === false && this.NotaSeleGeneralHasError === false && this.NotaEsp1HasError === false && this.NotaEsp2HasError === false) {
+            alert("La teva nota és: " + this.NotaAdmissio + "/14")
+            this.ResetValues()
+          } else {
+            alert("Hi ha errors en algunes notes, revisa-ho")
+          }
+          break;
+        default:
+          this.NotaAdmissio = this.NotaAcces + (this.NotaEsp1 * this.PondEsp1) + (this.NotaEsp2 * this.PondEsp2)
+          if(this.NotaAccesHasError === false && this.NotaEsp1HasError === false && this.NotaEsp2HasError === false) {
+            alert("La teva nota és: " + this.NotaAdmissio + "/14")
+            this.ResetValues()
+          } else {
+            alert("Hi ha errors en algunes notes, revisa-ho")
+          }
+          break;
+      }
+    },
+    HideSeleGeneral: function() {
+      if(this.EstudisCursats === "CFGS" || this.EstudisCursats === "Batxibac") {
+        this.IsBatxiBacOrCFGS = true
+        this.ResetValues()
+      } else {
+        this.IsBatxiBacOrCFGS = false
+        this.ResetValues()
+      }
+    },
+    ShowErrors: function() {
+      this.NotaAccesHasError = ((this.NotaAcces >= 5 && this.NotaAcces <= 10) ? false : true)
+      this.NotaSeleGeneralHasError = ((this.NotaSeleGeneral >= 5 && this.NotaSeleGeneral <= 10) ? false : true)
+      this.NotaEsp1HasError = ((this.NotaEsp1 >= 5 && this.NotaEsp1 <= 10) ? false : true)
+      this.NotaEsp2HasError = ((this.NotaEsp2 >= 5 && this.NotaEsp2 <= 10) ? false : true)
+    },
+    ResetValues: function() {
+      this.NotaAcces = ""
+      this.NotaSeleGeneral = ""
+      this.NotaEsp1 = ""
+      this.NotaEsp2 = ""
+      this.PondEsp1 = 0.2
+      this.PondEsp2 = 0.2
+      this.NotaAdmissio = 0
+      this.NotaAccesHasError = false
+      this.NotaSeleGeneralHasError = false
+      this.NotaEsp1HasError = false
+      this.NotaEsp2HasError = false
+    }
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
