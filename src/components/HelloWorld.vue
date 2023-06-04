@@ -123,7 +123,7 @@
   <footer class="footer p-4 mt-2">
       <div class="text-center">
         <p>
-          Fet amb &#10084; per Nilis24
+          Fet amb &#10084; per Nilis24. Versió 1.0
         </p>
     </div>
   </footer>
