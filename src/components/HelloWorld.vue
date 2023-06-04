@@ -1,7 +1,7 @@
 <template>
   <h1 class="text-3xl font-bold text-center my-5">Calcunota</h1>
 
-  <div class="container mx-auto w-full max-w-lg">
+  <div id="form" class="container mx-auto w-full max-w-lg">
 
 
     <div class="flex flex-wrap -mx-3 mb-6">
@@ -44,51 +44,68 @@
       <p :class="{ hidden: !NotaSeleGeneralHasError }" class="text-red-500 text-xs italic ml-3">La nota ha d'estar entre 5 i 10</p>
     </div>
 
-
     <div class="flex flex-wrap -mx-3 mb-6">
-
-      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+      <div class="w-full px-3">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="pond-esp-1">
-          ponderació especifica 1
-        </label>
-        <div class="relative">
-          <select v-model="PondEsp1" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="pond-esp-1">
-            <option>0.1</option>
-            <option>0.2</option>
-          </select>
-          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+            T'has examinat de les matèries especifiques?
+          </label>
+          <div class="relative">
+            <select v-model="HasMadeSeleEsp" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="pond-esp-1">
+              <option :value="true">Sí</option>
+              <option :value="false">No</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+              <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div class="w-full md:w-1/2 px-3">
-        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="nota-esp-1">
-          Nota especifica 1
-        </label>
-        <input :class="{ BorderError: NotaEsp1HasError }" v-model="NotaEsp1" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="nota-esp-1" type="number">
-        <p :class="{ hidden: !NotaEsp1HasError }" class="text-red-500 text-xs italic ml-3">La nota ha d'estar entre 5 i 10</p>
-      </div>
-
     </div>
 
+    <div :class="{ hidden: !HasMadeSeleEsp}">
+      <div class="flex flex-wrap -mx-3 mb-6">
 
-    <div class="flex flex-wrap -mx-3 mb-6">
-
-      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="pond-esp-2">
-          ponderació especifica 2
-        </label>
-        <div class="relative">
-          <select v-model="PondEsp2" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="pond-esp-2">
-            <option>0.1</option>
-            <option>0.2</option>
-          </select>
-          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="pond-esp-1">
+            ponderació especifica 1
+          </label>
+          <div class="relative">
+            <select v-model="PondEsp1" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="pond-esp-1">
+              <option>0.1</option>
+              <option>0.2</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+              <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+            </div>
           </div>
         </div>
+
+        <div class="w-full md:w-1/2 px-3">
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="nota-esp-1">
+            Nota especifica 1
+          </label>
+          <input :class="{ BorderError: NotaEsp1HasError }" v-model="NotaEsp1" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="nota-esp-1" type="number">
+          <p :class="{ hidden: !NotaEsp1HasError }" class="text-red-500 text-xs italic ml-3">La nota ha d'estar entre 5 i 10</p>
+        </div>
+
       </div>
+
+
+      <div class="flex flex-wrap -mx-3 mb-6">
+
+        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="pond-esp-2">
+            ponderació especifica 2
+          </label>
+          <div class="relative">
+            <select v-model="PondEsp2" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="pond-esp-2">
+              <option>0.1</option>
+              <option>0.2</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+              <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+            </div>
+          </div>
+        </div>
 
       <div class="w-full md:w-1/2 px-3">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="nota-esp-2">
@@ -98,13 +115,21 @@
         <p :class="{ hidden: !NotaEsp2HasError }" class="text-red-500 text-xs italic ml-3">La nota ha d'estar entre 5 i 10</p>
       </div>
 
+      </div>
     </div>
-
 
     <div class="text-center">
       <button @click="CalcularNota" class="p-3 bg-cyan-500 hover:bg-cyan-600 text-white rounded">Calcular nota</button>
     </div>
   </div>
+
+  <footer class="footer footer-center w-full p-4 bg-gray-800 text-white mt-5">
+      <div class="text-center">
+        <p>
+          Made with &#10084; for Nilis24
+        </p>
+    </div>
+  </footer>
 
 </template>
 
@@ -126,6 +151,7 @@ export default {
       NotaSeleGeneralHasError: false,
       NotaEsp1HasError: false,
       NotaEsp2HasError: false,
+      HasMadeSeleEsp: true
     }
   },
   methods: {
@@ -137,13 +163,19 @@ export default {
           if(this.NotaAccesHasError === false && this.NotaSeleGeneralHasError === false && this.NotaEsp1HasError === false && this.NotaEsp2HasError === false) {
             alert("La teva nota és: " + this.NotaAdmissio + "/14")
             this.ResetValues()
-          } else {
+          } else if(this.HasMadeSeleEsp === false) {
+            alert("La teva nota és: " + this.NotaAdmissio + "/14")
+            this.ResetValues()
+          } else(
             alert("Hi ha errors en algunes notes, revisa-ho")
-          }
+          )
           break;
         default:
           this.NotaAdmissio = this.NotaAcces + (this.NotaEsp1 * this.PondEsp1) + (this.NotaEsp2 * this.PondEsp2)
           if(this.NotaAccesHasError === false && this.NotaEsp1HasError === false && this.NotaEsp2HasError === false) {
+            alert("La teva nota és: " + this.NotaAdmissio + "/14")
+            this.ResetValues()
+          } else if(this.HasMadeSeleEsp === false) {
             alert("La teva nota és: " + this.NotaAdmissio + "/14")
             this.ResetValues()
           } else {
@@ -179,6 +211,7 @@ export default {
       this.NotaSeleGeneralHasError = false
       this.NotaEsp1HasError = false
       this.NotaEsp2HasError = false
+      this.HasMadeSeleEsp = true
     }
   }
 }
