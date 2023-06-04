@@ -1,9 +1,7 @@
 <template>
   <h1 class="text-3xl font-bold text-center my-5">Calcunota</h1>
 
-  <div id="form" class="container mx-auto w-full max-w-lg">
-
-
+  <div class="container mx-auto w-full max-w-lg">
     <div class="flex flex-wrap -mx-3 mb-6">
       <div class="w-full px-3">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="pond-esp-1">
@@ -28,7 +26,7 @@
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="nota-acces">
           Nota {{ EstudisCursats }}
         </label>
-        <input :class="{ BorderError: NotaAccesHasError }" v-model="NotaAcces" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="nota-acces" type="number">
+        <input min="0" max="10" step="0.01" :class="{ BorderError: NotaAccesHasError }" v-model="NotaAcces" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="nota-acces" type="number">
       </div>
       <p :class="{ hidden: !NotaAccesHasError }" class="text-red-500 text-xs italic ml-3">La nota ha d'estar entre 5 i 10</p>
     </div>
@@ -39,7 +37,7 @@
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="nota-sele-general">
           Nota selectivitat general
         </label>
-        <input :class="{ BorderError: NotaSeleGeneralHasError }" v-model="NotaSeleGeneral" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="nota-sele-general" type="number">
+        <input min="0" max="10" step="0.01" :class="{ BorderError: NotaSeleGeneralHasError }" v-model="NotaSeleGeneral" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="nota-sele-general" type="number">
       </div>
       <p :class="{ hidden: !NotaSeleGeneralHasError }" class="text-red-500 text-xs italic ml-3">La nota ha d'estar entre 5 i 10</p>
     </div>
@@ -83,10 +81,9 @@
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="nota-esp-1">
             Nota especifica 1
           </label>
-          <input :class="{ BorderError: NotaEsp1HasError }" v-model="NotaEsp1" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="nota-esp-1" type="number">
+          <input min="0" max="10" step="0.5" :class="{ BorderError: NotaEsp1HasError }" v-model="NotaEsp1" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="nota-esp-1" type="number">
           <p :class="{ hidden: !NotaEsp1HasError }" class="text-red-500 text-xs italic ml-3">La nota ha d'estar entre 5 i 10</p>
         </div>
-
       </div>
 
 
@@ -111,7 +108,7 @@
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="nota-esp-2">
           Nota especifica 2
         </label>
-        <input :class="{ BorderError: NotaEsp2HasError }" v-model="NotaEsp2" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="nota-esp-2" type="number">
+        <input min="0" max="10" step="0.5" :class="{ BorderError: NotaEsp2HasError }" v-model="NotaEsp2" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="nota-esp-2" type="number">
         <p :class="{ hidden: !NotaEsp2HasError }" class="text-red-500 text-xs italic ml-3">La nota ha d'estar entre 5 i 10</p>
       </div>
 
@@ -123,10 +120,10 @@
     </div>
   </div>
 
-  <footer class="footer footer-center w-full p-4 bg-gray-800 text-white mt-5">
+  <footer class="footer p-4 mt-2">
       <div class="text-center">
         <p>
-          Made with &#10084; for Nilis24
+          Fet amb &#10084; per Nilis24
         </p>
     </div>
   </footer>

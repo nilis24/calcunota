@@ -9,7 +9,8 @@
 }
 
 @media only screen and (max-width: 480px) {
-    #form {
-        margin: 0 2rem 0 2rem;
+    body {
+        margin-left: 2rem;
+        margin-right: 2rem;
     }
 }
